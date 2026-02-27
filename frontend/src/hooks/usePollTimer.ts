@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 
 export function usePollTimer(initialTime: number | null): number | null {
   const [timeRemaining, setTimeRemaining] = useState<number | null>(initialTime);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     if (initialTime === null) {
