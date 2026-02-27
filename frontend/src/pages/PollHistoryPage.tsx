@@ -19,7 +19,7 @@ export default function PollHistoryPage({ onBack, teacherId, chatMessages, parti
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/poll/history')
+    fetch(`${(import.meta as any).env?.VITE_SOCKET_URL || 'http://localhost:3001'}/api/poll/history`)
       .then((r) => r.json())
       .then((data) => {
         setPolls(data.data || []);
