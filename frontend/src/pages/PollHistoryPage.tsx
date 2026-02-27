@@ -5,6 +5,7 @@ import PollResults from '../components/PollResults';
 import { ChatMessage, Participant } from '../types';
 import ChatSidebar from '../components/ChatSidebar';
 
+
 interface Props {
   onBack: () => void;
   teacherId: string;
