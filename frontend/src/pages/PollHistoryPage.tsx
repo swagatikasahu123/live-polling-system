@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { ArrowLeft, MessageCircle } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { Poll } from '../types';
 import PollResults from '../components/PollResults';
 import { ChatMessage, Participant } from '../types';
 import ChatSidebar from '../components/ChatSidebar';
-
 
 interface Props {
   onBack: () => void;
@@ -20,13 +19,17 @@ export default function PollHistoryPage({ onBack, teacherId, chatMessages, parti
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${(import.meta as any).env?.VITE_SOCKET_URL || 'http://localhost:3001'}/api/poll/history`)
+    const backendUrl = 'https://live-polling-system-brrx.onrender.com';
+    fetch(`${backendUrl}/api/poll/history`)
       .then((r) => r.json())
       .then((data) => {
         setPolls(data.data || []);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch((err) => {
+        console.error('History fetch error:', err);
+        setLoading(false);
+      });
   }, []);
 
   return (
